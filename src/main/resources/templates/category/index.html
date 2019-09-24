@@ -2,12 +2,16 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head th:replace="fragments :: head"></head>
 
-<body>
+<body class="container">
+    <h1 th:text="${title}">Default Title</h1>
     <nav th:replace="fragments :: navigation"></nav>
-    <a href="/category/add">Add Category</a>
 
-    <li>
-        <ul th:each="category : ${categories}" th:text="${category}"></ul>
+    <p th:unless="${categories} and ${categories.size()}">no categories :(</p>
+
+    <li th:unless="not ${categories.size()}" th:each="category : ${categories}">
+        <ul th:text="${category.name}"></ul>
     </li>
+
+    <a href="/category/add">Add Category</a>
 </body>
 </html>
